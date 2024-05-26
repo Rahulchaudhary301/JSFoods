@@ -14,7 +14,7 @@ const password = process.env.PASSWORD;
 
 const FormData = async (req, res) => {
     try {
-        const {firstName, lastName,email,contactNumber,inquiry,companyName,message} = req.body;
+        const {firstName, lastName,email,contactNumber,companyName,message} = req.body;
          
         
         const transporter = nodemailer.createTransport({
@@ -27,10 +27,11 @@ const FormData = async (req, res) => {
         });
 
 
+        const recipients = ["rahulchaudhary301@gmail.com", "info.thejsfoods@gmail.com"]; 
 
         const info = await transporter.sendMail({
             from: emailId,
-            to: "rahulchaudhary301@gmail.com",
+            to: recipients.join(','), 
             subject: "Hello ✔",
            // text: Text,
            html: `<b>Hello Sir/Ma'am , this is Clients message 
@@ -38,7 +39,7 @@ const FormData = async (req, res) => {
            <h3>Contact Number : ${contactNumber}</h3>
            <h3>Email address : ${email}</h3>
            <h3>Company Name : ${companyName}</h3>
-           <h3>Enquary : ${inquiry}</h3>
+           
            <h3>Message : ${message}</h3>
            </b>`,
         });
